@@ -18,6 +18,7 @@
 
 	$ news
 	$ category
+	$ article/№
 
 # Literature
 
@@ -45,9 +46,11 @@
 	- content
 	- photo
 
-	$ author
-	$ work
+	$ authors
+	$ works
 	$ genre
+	$ author/№
+	$ work/№
 
 # Members
 
@@ -57,5 +60,6 @@
 
 	$ main
 	$ about
+	$ user/№
 	$ map
 	$ search
