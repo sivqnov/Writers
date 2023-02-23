@@ -25,6 +25,7 @@
 	Author
 	- name
 	- preview
+	- content
 	- photo (ManyToMany)
 	- genres (ManyToMany to Genre)
 	- works (ManyToMany to Work)
