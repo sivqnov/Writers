@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}
+<title>Sign Up</title>
+{% endblock %}
+
+{% block body %}
+
+{% if form.errors %}Ошибка регистрации! Пожалуйста, проверьте верно ли вы заполнили форму.{% endif %}
+<h1>Регистрация</h1><br>
+<form action="{% url 'signUp' %}" method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="Зарегистрироваться">
+</form>
+{% endblock %}

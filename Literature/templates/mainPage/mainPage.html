@@ -4,4 +4,12 @@
 
 {% block body %}
 <h1>Hello world!</h1>
+{% if user.is_authenticated %}
+<p>{{user}}</p>
+<a href="{% url 'logout' %}">Выйти</a>
+{% else %}
+<p>Guest</p>
+<a href="{% url 'signIn' %}">Войти в аккаунт</a>
+<a href="{% url 'signUp' %}">Регистриация</a>
+{% endif %}
 {% endblock %}

@@ -5,5 +5,6 @@ from django.shortcuts import render
 def mainPage(request):
     context = {
         'title': 'Писатели Беларуси',
+        'request': request,
     }
     return render(request, 'mainPage/mainPage.html', context)
