@@ -1,4 +1,4 @@
-# News:
+# News
 
 	News
 	- title
@@ -18,12 +18,14 @@
 
 	$ news
 	$ category
+	$ article/№
 
 # Literature
 
 	Author
 	- name
 	- preview
+	- content
 	- photo (ManyToMany)
 	- genres (ManyToMany to Genre)
 	- works (ManyToMany to Work)
@@ -45,9 +47,11 @@
 	- content
 	- photo
 
-	$ author
-	$ work
+	$ authors
+	$ works
 	$ genre
+	$ author/№
+	$ work/№
 
 # Members
 
@@ -57,5 +61,6 @@
 
 	$ main
 	$ about
+	$ user/№
 	$ map
 	$ search
