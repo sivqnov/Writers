@@ -1,20 +1,27 @@
+# Main
+
+	$ mainpage
+	$ about
+	$ map
+	$ search
+
 # News
 
-	News
+	Article
 	- title
 	- preview
-	- photo(ManyToMany)
+	- photo
 	- content
-	- category (ForeignKey to Category)
+	- categories (ManyToMany to Category)
+	- likes (ManyToMany to Profile)
 
 	Category
 	- title
-	- subcategory (ForeignKey to Category (use django-polymorphic))
 
-	Comment
-	- sub (ForeignKey to Comment)
+	ArticleComment
 	- content
-	- photo
+	- likes
+	- date
 
 	$ news
 	$ category
@@ -24,43 +31,69 @@
 
 	Author
 	- name
+	- alias
 	- preview
 	- content
-	- photo (ManyToMany)
+	- photo
 	- genres (ManyToMany to Genre)
 	- works (ManyToMany to Work)
+
+	AuthorComment
+	- content
+	- date
+	- likes (ManyToMany to Profile)
+
+	Genre
+	- title
+	- preview
+	- content
+	- photo
+
+	GenreComment
+	- content
+	- date
+	- likes (ManyToMany to Profile)
 
 	Work
 	- title
 	- preview
 	- content
 	- photo
-	- genre (ManyToMany to Genre)
-	- author (ForeignKey to Author)
+	- genres (ManyToMany to Genre)
+	- authors (ManyToMany to Author)
 
-	Genre
-	- title
-	- description
-
-	Comment
-	- sub (ForeignKey to Comment)
+	WorkComment
 	- content
-	- photo
+	- date
+	- likes (ManyToMany to Profile)
+
 
 	$ authors
+	$ author/#
+
 	$ works
-	$ genre
-	$ author/№
-	$ work/№
+	$ work/#
+
+	$ genres
+	$ genre/#
 
 # Members
 
-	User
-	- likes (add likes field)
-	- photo (add photo field)
+	Profile
+	- user (FK to User)
+	- avatar
+	- bio
+	- newsLikes (ManyToMany to News.Article)
+	- authorLikes (ManyToMany to Literature.Author)
+	- genreLikes (ManyToMany to Literature.Genre)
+	- workLikes (ManyToMany to Literature.Work)
 
-	$ main
-	$ about
 	$ user/№
-	$ map
-	$ search
+	$ edit_user
+	$ login
+	$ register
+	$ change_password
+	$ send_email
+	$ email_sent
+	$ set_password
+	$ done
