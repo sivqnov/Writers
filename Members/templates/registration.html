@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{ title }} - Пiсьменнiкi Беларусi</title>
+{% endblock %}
+
+{% block content %}
+<h1>Рэгiстрацыя</h1>
+<section>
+
+    {% if form.errors %}
+        <div class="">
+            <i class="fa fa-exclamation-triangle"></i>
+            <strong class="">Пры спробе рэгістрацыі ўзніклі наступныя памылкі:</strong>
+            <div class="">{{ form.errors }}</div>
+        </div>
+    {% endif %}
+
+    <form method="POST" action="">
+        {% csrf_token %}
+        <div class="row gtr-uniform">
+            <div class="col-12 col-12-xsmall">
+                {{ form.first_name }}
+            </div>
+            <div class="col-12 col-12-xsmall">
+                {{ form.last_name }}
+            </div>
+            <div class="col-12 col-12-xsmall">
+                {{ form.email }}
+            </div>
+            <div class="col-12 col-12-xsmall">
+                {{ form.username }}
+            </div>
+            <div class="col-12 col-12-xsmall">
+                {{ formProfile.bio }}
+            </div>
+            <div class="col-12 col-12-xsmall">
+                {{ form.password1 }}
+            </div>
+            <div class="col-12 col-12-xsmall">
+                {{ form.password2 }}
+            </div>
+
+            <div class="col-12">
+                <ul class="actions">
+                    <li><input type="submit" value="Увайсці" /></li>
+                    <li>
+                        <div class="col-6 col-12-small">
+                            <input type="checkbox" id="passwordInputCheckbox">
+                            <label for="passwordInputCheckbox">Паказаць пароль</label>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </form>
+</section>
+{% endblock %}
+
+{% block about %}
+<section class="blurb">
+    <h2>Аб сайце</h2>
+    <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.</p>
+    <ul class="actions">
+        <li><a href="{% url 'about' %}" class="button">Learn More</a></li>
+    </ul>
+</section>
+{% endblock %}
+
+{% block import %}
+    <script src="{% static 'scripts/show_password.js' %}"></script>
+{% endblock %}

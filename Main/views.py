@@ -4,6 +4,12 @@ from django.shortcuts import render
 
 def main(request):
     context = {
-        'title': 'Mainpage',
+        'title': 'Галоўная старонка',
     }
     return render(request, 'main.html', context)
+
+def about(request):
+    context = {
+        'title': 'Аб сайце',
+    }
+    return render(request, 'about.html', context)
