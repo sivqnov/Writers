@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load literature_tags %}
+
+{% block title %}
+<title>{{ title }} - Пiсьменнiкi Беларусi</title>
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/content.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1 class="content-title"><a href="{% url 'works' %}"><i class="fa fa-users"></i>Работы</a></h1>
+
+    <article class="post">
+        <header>
+            <div class="title">
+                <h2>{{ item.title }}</h2>
+            </div>
+        </header>
+        <p style="height: auto;">
+            {% if item.photo %}
+            <a href="{{item.photo.url}}"><img class="card-image" src="{{ item.photo.url }}" alt="" /></a>
+            {% endif %}
+            <h3>Аб рабоце</h3>
+            {% autoescape off %}
+            {{ item.content }}
+            {% endautoescape %}
+        </p>
+        {% if item.genres %}
+        <section>
+            <h1 style="margin-bottom: 3rem;">Жанры</h1>
+            <ul class="posts">
+                {% for genre in item.genres.all %}
+                <li style="margin: 0;">
+                    <article>
+                        <header>
+                            <h3><a href="{{ genre.get_absolute_url }}">{{ genre.title }}</a></h3>
+                            <p class="published">{{ genre.preview }}</p>
+                        </header>
+                        {% if genre.photo %}
+                            <a href="{{ genre.get_absolute_url }}" class="image"><img src="{{ genre.photo.url }}" alt="" /></a>
+                        {% else %}
+                            <img src="{% static 'images/genre.png' %}" style="width: 32px; margin-right: 16px;" alt="" />
+                        {% endif %}
+                    </article>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+        {% if item.authors %}
+        <section>
+            <h1 style="margin-bottom: 3rem;">Аўтар</h1>
+            <ul class="posts">
+                {% for author in item.authors.all %}
+                <li style="margin: 0;">
+                    <article>
+                        <header>
+                            <h3><a href="{{ author.get_absolute_url }}">{{ author.name }}</a></h3>
+                            <p class="published">{{ author.preview }}</p>
+                        </header>
+                        {% if author.photo %}
+                            <a href="{{ author.get_absolute_url }}" class="image"><img src="{{ author.photo.url }}" alt="" /></a>
+                        {% else %}
+                            <img src="{% static 'images/genre.png' %}" style="width: 32px; margin-right: 16px;" alt="" />
+                        {% endif %}
+                    </article>
+                </li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+        <footer>
+            <ul class="actions">
+                <li></li>
+            </ul>
+            <ul class="stats">
+                <li><a href="#" class="icon solid fa-heart">1488</a></li>
+                <li><a href="#" class="icon solid fa-comment">228</a></li>
+            </ul>
+        </footer>
+    </article>
+    
+{% endblock %}
+
+{% block sidebar %}
+{% mini_posts True 1 %}
+{% endblock %}
+
+{% block import %}
+{% endblock %}

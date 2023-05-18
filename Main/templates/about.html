@@ -5,11 +5,20 @@
 <title>{{ title }} - Пiсьменнiкi Беларусi</title>
 {% endblock %}
 
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/about.css' %}">
+{% endblock %}
+
 {% block content %}
-<h1>This is about page</h1>
+<h1>Аб сайце</h1>
 <p>
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sapiente pariatur aliquid hic quam optio odio fugiat minus neque, sunt illo sequi, porro cumque quae quidem quisquam possimus? Fuga, beatae totam?
-    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Tempora facere magnam ut exercitationem? Quibusdam, pariatur consequatur. Laudantium officiis est quia cum, vel officia alias dolorum recusandae nesciunt animi non illum!
-    Lorem ipsum dolor sit amet consectetur adipisicing elit. Sint explicabo enim cum nam dicta excepturi, adipisci quisquam delectus laboriosam illo aperiam quis ab. Incidunt consequuntur voluptates laudantium vitae ea cum.
+    Тут павінна быць інфармацыя аб сайце: мэта стварэння, дата стварэння і асноўная інфармацыя аб сайце.
+    <a href="https://vk.com/vseh0rosho" target="_blank">
+        <div class="author">
+            <img src="{% static 'images/karen.jpg' %}" class="author" alt="Karina Vysogorets">
+            <p class="authorName">Карiна Высагореэц</p>
+            <p class="authorBio">Стваральнік сайта</p>
+        </div>
+    </a>
 </p>
 {% endblock %}

@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load literature_tags %}
+
+{% block title %}
+<title>{{ title }} - Пiсьменнiкi Беларусi</title>
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'styles/content.css' %}">
+{% endblock %}
+
+{% block content %}
+    <h1 class="content-title"><i class="fa fa-users"></i>Работы</h1>
+
+    {% for item in items %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h2><a href="{{item.get_absolute_url}}">{{ item.title }}</a></h2>
+                {% if item.authors %}
+                    <p>Аўтар:
+                    {% for author in item.authors.all|slice:2 %}
+                    <a href="{{ author.get_absolute_url }}">{{ author.name }}</a> 
+                    {% endfor %}
+                    </p>
+                {% endif %}
+                {% if item.genres %}
+                    <p>Жанр: |
+                    {% for genre in item.genres.all|slice:2 %}
+                    <a href="{{ genre.get_absolute_url }}">{{ genre.title }}</a> | 
+                    {% endfor %}
+                    ...
+                    </p>
+                {% endif %}
+            </div>
+        </header>
+        {% if item.photo %}
+        <p style="height: auto;"><a href="{{item.get_absolute_url}}"><img class="card-image" src="{{ item.photo.url }}" alt="" /></a>
+        {% endif %}
+        {{ item.preview }}
+        </p>
+        <a href="{{item.get_absolute_url}}" class="button large">Падрабязней</a>
+        <footer>
+            <ul class="actions">
+                <li></li>
+            </ul>
+            <ul class="stats">
+                <li><a href="#" class="icon solid fa-heart">1488</a></li>
+                <li><a href="#" class="icon solid fa-comment">228</a></li>
+            </ul>
+        </footer>
+    </article>
+    {% endfor %}
+
+    {% include 'inc/pagination.html' %}
+    
+{% endblock %}
+
+{% block sidebar %}
+{% mini_posts True 1 %}
+{% endblock %}
+
+{% block import %}
+{% endblock %}

@@ -1,0 +1,21 @@
+{% load static %}
+<section>
+    <h1 style="margin-bottom: 3rem;">{{ title }}</h1>
+    <ul class="posts">
+        {% for item in items %}
+        <li style="margin: 0;">
+            <article>
+                <header>
+                    <h3><a href="{{ item.get_absolute_url }}">{% if type == "0" %}{{item.name}}{% else %}{{ item.title }}{% endif %}</a></h3>
+                    <p class="published">{% if type == "0" %}Пiсьменнiк{% elif type == "1" %}Жанр{% else %}Работа{% endif %}</p>
+                </header>
+                {% if item.photo and type != "1" %}
+                    <a href="{{ item.get_absolute_url }}" class="image"><img src="{{ item.photo.url }}" alt="" /></a>
+                {% else %}
+                    <img src="{% static 'images/genre.png' %}" style="width: 32px; margin-right: 16px;" alt="" />
+                {% endif %}
+            </article>
+        </li>
+        {% endfor %}
+    </ul>
+</section>

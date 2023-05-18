@@ -22,9 +22,9 @@
 						<h1><a href="{% url 'main' %}">Пiсьменнiкi Беларусi</a></h1>
 						<nav class="links">
 							<ul>
-								<li><a href="#"><i class="fa fa-feather"></i>Пiсьменнiкi</a></li>
-								<li><a href="#"><i class="fa fa-bars"></i>Жанры</a></li>
-								<li><a href="#"><i class="fa fa-book"></i>Працы</a></li>
+								<li><a href="{% url 'writers' %}"><i class="fa fa-users"></i>Пiсьменнiкi</a></li>
+								<li><a href="{% url 'genres' %}"><i class="fa fa-feather"></i>Жанры</a></li>
+								<li><a href="{% url 'works' %}"><i class="fa fa-book"></i>Работы</a></li>
 							</ul>
 						</nav>
 						<nav class="main">
@@ -61,20 +61,20 @@
 							<section>
 								<ul class="links">
 									<li>
-										<a href="#">
+										<a href="{% url 'writers' %}">
 											<h3>Пiсьменнiкi Беларусi</h3>
 											<p>Тут вы можаце прачытаць пра пісьменнікаў Беларусі</p>
 										</a>
 									</li>
 									<li>
-										<a href="#">
+										<a href="{% url 'genres' %}">
 											<h3>Жанры</h3>
 											<p>Тут вы можаце пазнаёміцца з жанрамі ў якіх працавалі пісьменнікі</p>
 										</a>
 									</li>
 									<li>
-										<a href="#">
-											<h3>Працы</h3>
+										<a href="{% url 'works' %}">
+											<h3>Работы</h3>
 											<p>Тут сабраны ўсе працы беларускіх пісьменнікаў</p>
 										</a>
 									</li>
@@ -639,6 +639,8 @@
 							</section> -->
 
 						<!-- About -->
+							{% block sidebar %}
+							{% endblock %}
 							{% block about %}
 							{% endblock %}
 

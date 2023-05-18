@@ -32,6 +32,8 @@
 	Author
 	- name
 	- alias
+	- date_of_birth
+	- date_of_death
 	- preview
 	- content
 	- photo
@@ -39,6 +41,8 @@
 	- works (ManyToMany to Work)
 
 	AuthorComment
+	- author (FK to Author)
+	- user (FK to User)
 	- content
 	- date
 	- likes (ManyToMany to Profile)

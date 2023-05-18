@@ -1,0 +1,30 @@
+.author{
+    position: relative;
+    width: 300px;
+}
+
+.author img{
+    width: 100%;
+    border-radius: 1rem;
+}
+
+.author .authorName{
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+    font-size: medium;
+    color: white;
+    position: absolute;
+    bottom: 16px;
+    left: 0;
+}
+
+.author .authorBio{
+    width: 100%;
+    text-align: center;
+    font-weight: 200;
+    color: white;
+    position: absolute;
+    bottom: 2px;
+    left: 0;
+}

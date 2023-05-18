@@ -1886,6 +1886,11 @@ input, select, textarea {
 		white-space: nowrap;
 	}
 
+		.button.active{
+			color: #2ebaae !important;
+			border-color: #2ebaae !important;
+		}
+
 		input[type="submit"]:hover,
 		input[type="reset"]:hover,
 		input[type="button"]:hover,
@@ -2826,6 +2831,8 @@ input, select, textarea {
 			-webkit-align-items: center;
 			-ms-align-items: center;
 			align-items: center;
+			width: 100%;
+			margin-top: 2rem;
 		}
 
 			.post > footer .actions {
