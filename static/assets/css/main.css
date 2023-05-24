@@ -3632,3 +3632,12 @@ input, select, textarea {
 		.fa{
 			margin-right: 0.5em;
 		}
+
+.icon-active{
+	padding: 4px 8px;
+	background-color: #FFE6E6;
+	border-radius: 1rem;
+	border: 1px solid #FFC8C8;
+	font-weight: 600;
+	color: black !important;
+}

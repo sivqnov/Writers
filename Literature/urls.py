@@ -8,4 +8,6 @@ urlpatterns = [
     path('genre/<int:genre_id>', view_genre, name='genre'),
     path('works', works, name='works'),
     path('work/<int:work_id>', view_work, name='work'),
+    path('get_writers', get_writers, name='get_writers')
+    path('get_genres', get_genres, name='get_genres')
 ]

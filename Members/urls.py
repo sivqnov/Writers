@@ -5,4 +5,5 @@ urlpatterns = [
     path('login', login_user, name='login'),
     path('logout', logout_user, name='logout'),
     path('registration', register_user, name='registration'),
+    path('<str:username>', profile, name='profile'),
 ]

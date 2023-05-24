@@ -1,16 +1,20 @@
 from django.shortcuts import render
 from .models import Author, Genre, Work
 from django.core.paginator import Paginator
+from Members.models import Profile
+from django.db.models import Q
+from Main.symbols import *
 # Create your views here.
 
+ITEMS_ON_PAGE = 1
+
 def writers(request):
-    authors = Author.objects.order_by('-id')
-    items_on_page = 6
-    pag = Paginator(authors, items_on_page)
+    authors = Author.objects.order_by('name')
+    pag = Paginator(authors, ITEMS_ON_PAGE)
     page_number = request.GET.get('page', 1)
     page = pag.get_page(page_number)
     context = {
-        'title': 'Писатели',
+        'title': 'Пiсьменнiкi',
         'items': page,
     }
     return render(request, 'writers.html', context)
@@ -64,3 +68,77 @@ def view_work(request, work_id):
         'item': item,
     }
     return render(request, 'work.html', context)
+
+def get_writers(request):
+    profile = Profile.objects.get(user=request.user)
+    array = ['name', '-name', 'date_of_birth', '-date_of_birth',]
+    if request.method == "GET":
+        try:
+            cat = int(request.GET.get('category', 0))
+        except:
+            cat = 0
+        if cat >= len(array) or cat < 0:
+            cat=0
+        q = clean_q(request.GET.get('q', '')[:MAX_QUERY_LENGTH])
+        with_photo = request.GET.get('with_photo', 'off')
+        with_alias = request.GET.get('with_alias', 'off')
+        page_number = int(request.GET.get('page', 1))
+        page_action = request.GET.get('pag', 'blin')
+        if q=='':
+            items = Author.objects.order_by(array[cat])
+        else:
+            items = Author.objects.filter(Q(name__iregex=q) | Q(alias__iregex=q) | Q(preview__iregex=q) | Q(content__iregex=q)).order_by(array[cat])
+        if with_photo == 'on':
+            items = items.exclude(photo='')
+        if with_alias == 'on':
+            items = items.exclude(alias='')
+        pag = Paginator(items, ITEMS_ON_PAGE)
+        page = pag.get_page(page_number)
+        if page_action == 'next' and page.has_next():
+            page_number += 1
+        elif page_action == 'prev' and page.has_previous():
+            page_number -= 1
+        pag = Paginator(items, ITEMS_ON_PAGE)
+        page = pag.get_page(page_number)
+        context = {
+            'items': page,
+            'profile': profile,
+        }
+        return render(request, 'inc/authors.html', context)
+
+def get_genres(request):
+    profile = Profile.objects.get(user=request.user)
+    array = ['name', '-name', 'date_of_birth', '-date_of_birth',]
+    if request.method == "GET":
+        try:
+            cat = int(request.GET.get('category', 0))
+        except:
+            cat = 0
+        if cat >= len(array) or cat < 0:
+            cat=0
+        q = clean_q(request.GET.get('q', '')[:MAX_QUERY_LENGTH])
+        with_photo = request.GET.get('with_photo', 'off')
+        with_alias = request.GET.get('with_alias', 'off')
+        page_number = int(request.GET.get('page', 1))
+        page_action = request.GET.get('pag', 'blin')
+        if q=='':
+            items = Author.objects.order_by(array[cat])
+        else:
+            items = Author.objects.filter(Q(name__iregex=q) | Q(alias__iregex=q) | Q(preview__iregex=q) | Q(content__iregex=q)).order_by(array[cat])
+        if with_photo == 'on':
+            items = items.exclude(photo='')
+        if with_alias == 'on':
+            items = items.exclude(alias='')
+        pag = Paginator(items, ITEMS_ON_PAGE)
+        page = pag.get_page(page_number)
+        if page_action == 'next' and page.has_next():
+            page_number += 1
+        elif page_action == 'prev' and page.has_previous():
+            page_number -= 1
+        pag = Paginator(items, ITEMS_ON_PAGE)
+        page = pag.get_page(page_number)
+        context = {
+            'items': page,
+            'profile': profile,
+        }
+        return render(request, 'inc/authors.html', context)

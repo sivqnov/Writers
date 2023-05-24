@@ -13,42 +13,37 @@
 {% block content %}
     <h1 class="content-title"><i class="fa fa-users"></i>Пiсьменнiкi</h1>
 
-    {% for item in items %}
-    <article class="post">
-        <header>
-            <div class="title">
-                <h2><a href="{{item.get_absolute_url}}">{{ item.name }}</a></h2>
-                {% if item.alias %}
-                <h3>Псеўданім: {{ item.alias }}</h3>
-                {% endif %}
-                <p>Жанры: |
-                {% for genre in item.genres.all %}
-                <a href="{{ genre.get_absolute_url }}">{{ genre.title }}</a> | 
-                {% endfor %}
-                </p>
-            </div>
-        </header>
-        <p style="height: auto;"><a href="{{item.get_absolute_url}}"><img class="card-image" src="{{ item.photo.url }}" alt="" /></a>
-        {{ item.preview }}
-        </p>
-        <a href="{{item.get_absolute_url}}" class="button large">Падрабязней</a>
-        <footer>
-            <ul class="actions">
-                <li></li>
-            </ul>
-            <ul class="stats">
-                <li><a href="#" class="icon solid fa-heart">1488</a></li>
-                <li><a href="#" class="icon solid fa-comment">228</a></li>
-            </ul>
-        </footer>
-    </article>
-    {% endfor %}
-
-    {% include 'inc/pagination.html' %}
-    
+    <div id="contents">
+        {% include 'inc/authors.html' %}
+    </div>
 {% endblock %}
 
 {% block sidebar %}
+<div class="col-12">
+    <h3>Пошук</h3>
+    <input type="text" name="q" placeholder="Пачніце набіраць..." hx-get="{% url 'get_writers' %}" hx-target="#contents" hx-trigger="keyup delay:150ms changed" hx-include="[name='with_photo'], [name='with_alias'], [name='category']">
+    <br>
+    <h3>Сартаванне</h3>
+    <select name="category" hx-get="{% url 'get_writers' %}" hx-target="#contents" hx-trigger="change" hx-include="[name='q'], [name='with_photo'], [name='with_alias']">
+        <optgroup label="Па імені">
+            <option value="0">Iмя А-Я</option>
+            <option value="1">Iмя Я-А</option>
+        </optgroup>
+        <optgroup label="Па даце нараджэння">
+            <option value="2">Па ўзрастанні</option>
+            <option value="3">Па змяншэнні</option>
+        </optgroup>
+    </select>
+</div>
+
+<div class="col-6" style="margin-top: 1rem;">
+    <h3>Фільтры</h3>
+    <input type="checkbox" id="with_photo" name="with_photo" hx-get="{% url 'get_writers' %}" hx-target="#contents" hx-trigger="change" hx-include="[name='q'], [name='category'], [name='with_alias']">
+    <label for="with_photo">З фота</label>
+    <input type="checkbox" id="with_alias" name="with_alias" hx-get="{% url 'get_writers' %}" hx-target="#contents" hx-trigger="change" hx-include="[name='q'], [name='category'], [name='with_photo']">
+    <label for="with_alias">З псеўданімам</label>
+</div>
+
 {% mini_posts True 1 %}
 {% endblock %}
 

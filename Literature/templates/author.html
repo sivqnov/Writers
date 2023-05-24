@@ -36,6 +36,7 @@
             {{ author.content }}
             {% endautoescape %}
         </p>
+        {% if author.get_works %}
         <section>
             <h1 style="margin-bottom: 3rem;">Працы пiсьменнiка</h1>
             <ul class="posts">
@@ -56,6 +57,7 @@
                 {% endfor %}
             </ul>
         </section>
+        {% endif %}
         <footer>
             <ul class="actions">
                 <li></li>

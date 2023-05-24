@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 from Members.models import Profile
 from django.conf import settings
+from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Author(models.Model):
@@ -10,7 +11,8 @@ class Author(models.Model):
     date_of_birth = models.DateField(blank=True, null=True, verbose_name='Дата рождения')
     date_of_death = models.DateField(blank=True, null=True, verbose_name='Дата смерти')
     preview = models.TextField(max_length=255, verbose_name='Краткое описание')
-    content = models.TextField(verbose_name='Контент')
+    # content = models.TextField(verbose_name='Контент')
+    content = RichTextField(verbose_name='Контент')
     photo = models.ImageField(upload_to = 'authors/%Y/%m/%d/', blank=True, verbose_name='Фото')
     genres = models.ManyToManyField('Genre', blank=True, verbose_name='Жанры')
     # works = models.ManyToManyField('Work', blank=True, verbose_name='Работы')
@@ -35,7 +37,6 @@ class AuthorComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Автор комментария')
     content = models.TextField(max_length=255, verbose_name='Контент')
     date = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
-    likes = models.ManyToManyField('Members.Profile', verbose_name='Лайки')
 
     def __str__(self):
         return f'{self.author}. {self.user}'
@@ -48,7 +49,8 @@ class AuthorComment(models.Model):
 class Genre(models.Model):
     title = models.CharField(max_length=55, verbose_name='Название')
     preview = models.TextField(max_length=255, verbose_name='Краткое описание')
-    content = models.TextField(verbose_name='Контент')
+    # content = models.TextField(verbose_name='Контент')
+    content = RichTextField(verbose_name='Контент')
     photo = models.ImageField(upload_to='genres/%Y/%m/%d/', blank=True, verbose_name='Фото')
 
     def get_absolute_url(self):
@@ -73,7 +75,6 @@ class GenreComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Автор комментария')
     content = models.TextField(max_length=255, verbose_name='Контент')
     date = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
-    likes = models.ManyToManyField('Members.Profile', verbose_name='Лайки')
 
     def __str__(self):
         return f'{self.author}. {self.user}'
@@ -86,7 +87,8 @@ class GenreComment(models.Model):
 class Work(models.Model):
     title = models.CharField(max_length=100, verbose_name='Название')
     preview = models.TextField(max_length=255, verbose_name='Описание')
-    content = models.TextField(verbose_name='Контент')
+    # content = models.TextField(verbose_name='Контент')
+    content = RichTextField(verbose_name='Контент')
     photo = models.ImageField(upload_to='works/%Y/%m/%d/', blank=True, verbose_name='Фото')
     genres = models.ManyToManyField('Genre', verbose_name='Жанры')
     authors = models.ManyToManyField('Author', verbose_name='Авторы')
@@ -107,7 +109,6 @@ class WorkComment(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, verbose_name='Автор комментария')
     content = models.TextField(max_length=255, verbose_name='Контент')
     date = models.DateTimeField(auto_now_add=True, verbose_name='Дата')
-    likes = models.ManyToManyField('Members.Profile', verbose_name='Лайки')
 
     def __str__(self):
         return f'{self.author}. {self.user}'

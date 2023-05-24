@@ -1,0 +1,37 @@
+{% for item in items %}
+    <article class="post">
+        <header>
+            <div class="title">
+                <h2><a href="{{item.get_absolute_url}}">{{ item.name }}</a></h2>
+                {% if item.alias %}
+                <h3>Псеўданім: {{ item.alias }}</h3>
+                {% endif %}
+                {% if item.genres.all %}
+                    <p>Жанры: |
+                    {% for genre in item.genres.all %}
+                    <a href="{{ genre.get_absolute_url }}">{{ genre.title }}</a> | 
+                    {% endfor %}
+                    </p>
+                {% endif %}
+            </div>
+        </header>
+        <p style="height: auto;">
+            {% if item.photo %}
+            <a href="{{item.get_absolute_url}}"><img class="card-image" src="{{ item.photo.url }}" alt="" /></a>
+            {% endif %}
+        {{ item.preview }}
+        </p>
+        <a href="{{item.get_absolute_url}}" class="button large">Падрабязней</a>
+        <footer>
+            <ul class="actions">
+                <li></li>
+            </ul>
+            <!-- <ul class="stats">
+                <li><a href="#" class="icon solid fa-comment">228</a></li>
+            </ul> -->
+        </footer>
+    </article>
+{% endfor %}
+{% if items %}
+{% include 'inc/pagination/authors.html' %}
+{% endif %}

@@ -1,5 +1,6 @@
 from django import template
 from Literature.models import Author, Genre, Work
+from Members.models import Profile
 
 register = template.Library()
 

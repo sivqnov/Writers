@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+<title>{{ title }} - Пiсьменнiкi Беларусi</title>
+{% endblock %}
+
+{% block content %}
+<h1>@{{ profile.user.get_username }}</h1>
+{% endblock %}
+
+{% block about %}
+<section class="blurb">
+    <h2>Аб сайце</h2>
+    <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.</p>
+    <ul class="actions">
+        <li><a href="{% url 'about' %}" class="button">Learn More</a></li>
+    </ul>
+</section>
+{% endblock %}
+
+{% block import %}
+    <script src="{% static 'scripts/show_password.js' %}"></script>
+{% endblock %}

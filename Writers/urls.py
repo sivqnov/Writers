@@ -23,6 +23,7 @@ urlpatterns = [
     path('', include('Main.urls')),
     path('auth/', include('Members.urls')),
     path('literature/', include('Literature.urls')),
+    path('ckeditor/', include('ckeditor_uploader.urls')),
 ]
 
 if settings.DEBUG:

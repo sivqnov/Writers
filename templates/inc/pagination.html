@@ -1,19 +1,19 @@
 <ul class="actions pagination">
     {% if items.has_previous %}
-        <li><a href="?page={{ items.number|add:-1 }}" class="button large previous">Папярэдняя</a></li>
+        <li><button class="button large previous" hx-get="{% url 'get_writers' %}?pag=prev&page={{items.number}}" hx-target="#contents" hx-trigger="click" hx-include="[name='category'], [name='with_photo'], [name='with_alias']">Папярэдняя</button></li>
     {% else %}
-        <li><a class="disabled button large previous">Папярэдняя</a></li>
+        <li><button class="disabled button large previous" disabled="true">Папярэдняя</button></li>
     {% endif %}
     {% for n in items.paginator.page_range %}
         {% if items.number == n %}
-            <li><a href="?page={{ n }}" class="button large active">{{ n }}</a></li>
+            <li><button class="button large active" hx-get="{% url 'get_writers' %}?pag=set&page={{n}}" hx-target="#contents" hx-trigger="click" hx-include="[name='category'], [name='with_photo'], [name='with_alias']">{{ n }}</button></li>
         {% elif n > items.number|add:-4 and n < items.number|add:4 %}
-            <li><a href="?page={{ n }}" class="button large">{{ n }}</a></li>
+            <li><button class="button large" hx-get="{% url 'get_writers' %}?pag=set&page={{n}}" hx-target="#contents" hx-trigger="click" hx-include="[name='category'], [name='with_photo'], [name='with_alias']">{{ n }}</button></li>
         {% endif %}
     {% endfor %}
     {% if items.has_next %}
-        <li><a href="?page={{ items.number|add:+1 }}" class="button large next">Наступная</a></li>
+        <li><button class="button large next" hx-get="{% url 'get_writers' %}?pag=next&page={{items.number}}" hx-target="#contents" hx-trigger="click" hx-include="[name='category'], [name='with_photo'], [name='with_alias']">Наступная</button></li>
     {% else %}
-        <li><a class="disabled button large next">Наступная</a></li>
+        <li><button class="disabled button large next" disabled="true">Наступная</button></li>
     {% endif %}
 </ul>

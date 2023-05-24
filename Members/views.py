@@ -5,6 +5,7 @@ from django.contrib import messages
 from .forms import RegisterProfileForm, RegisterUserForm
 from .models import Profile
 from django.contrib.auth.models import User
+from Literature.models import Author, Genre, Work
 
 # Create your views here.
 
@@ -62,3 +63,13 @@ def register_user(request):
             'formProfile': formProfile,
             }
         return render(request, 'registration.html', context)
+
+@login_required(login_url='login')
+def profile(request, username):
+    profile = Profile.objects.get(user__username=username)
+    authors = Author.objects.filter()
+    context = {
+        'title': 'Профиль',
+        'profile': profile,
+    }
+    return render(request, 'profile.html', context)
