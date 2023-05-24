@@ -6,15 +6,25 @@
 {% endblock %}
 
 {% block content %}
-<h1>@{{ profile.user.get_username }}</h1>
+<h1>Імя карыстальніка: {{ profile.user.get_username }}</h1>
+{% if profile.user.first_name %}
+<h3>Імя: {{ profile.user.first_name }}</h3>
+{% endif %}
+{% if profile.user.last_name %}
+<h3>Прозвішча: {{ profile.user.last_name }}</h3>
+{% endif %}
+{% if profile.user.email %}
+<h3>Email: {{ profile.user.email }}</h3>
+{% endif %}
+<a href="{% url 'logout' %}" class="button small">Змяніць акаўнт</a>
 {% endblock %}
 
 {% block about %}
 <section class="blurb">
     <h2>Аб сайце</h2>
-    <p>Mauris neque quam, fermentum ut nisl vitae, convallis maximus nisl. Sed mattis nunc id lorem euismod amet placerat. Vivamus porttitor magna enim, ac accumsan tortor cursus at phasellus sed ultricies.</p>
+    <p>Апісанне інфармацыі аб сайце. Навошта ён быў створаны, кім і калі.</p>
     <ul class="actions">
-        <li><a href="{% url 'about' %}" class="button">Learn More</a></li>
+        <li><a href="{% url 'about' %}" class="button">Адкрыць</a></li>
     </ul>
 </section>
 {% endblock %}

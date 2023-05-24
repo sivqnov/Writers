@@ -3,18 +3,17 @@
         <header>
             <div class="title">
                 <h2><a href="{{item.get_absolute_url}}">{{ item.title }}</a></h2>
-                {% if item.get_authors %}
-                    <p>Пiсьменнiкi: |
-                    {% for author in item.get_authors.all|slice:2 %}
-                    <a href="{{ author.get_absolute_url }}">{{ author.name }}</a> | 
+                {% if item.authors %}
+                    <p>Аўтар:
+                    {% for author in item.authors.all|slice:2 %}
+                    <a href="{{ author.get_absolute_url }}">{{ author.name }}</a> 
                     {% endfor %}
-                    ...
                     </p>
                 {% endif %}
-                {% if item.get_works %}
-                    <p>Работы: |
-                    {% for work in item.get_works.all|slice:2 %}
-                    <a href="{{ work.get_absolute_url }}">{{ work.title }}</a> | 
+                {% if item.genres %}
+                    <p>Жанр: |
+                    {% for genre in item.genres.all|slice:2 %}
+                    <a href="{{ genre.get_absolute_url }}">{{ genre.title }}</a> | 
                     {% endfor %}
                     ...
                     </p>
@@ -35,5 +34,5 @@
     </article>
 {% endfor %}
 {% if items %}
-{% include 'inc/pagination/genres.html' %}
+{% include 'inc/pagination/works.html' %}
 {% endif %}
